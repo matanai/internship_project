@@ -1,0 +1,181 @@
+<div class="container-fluid mx-0 px-3">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">Welcome</a>
+    </nav>
+</div>
+
+<main class="container-fluid px-4">
+
+    <!-- SEARCH -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-house-door me-1"></i>Search Hotel
+        </div>
+        <div class="card-body">
+            <form class="row gy-2 gx-3 align-items-center">
+                <div class="col-auto mx-2 form-group cityCountry">
+                    <input type="text" class="form-control" id="newCityCountry" placeholder="Destination" />
+                </div>
+                <div class="col-auto mx-2 form-group date">
+                    <input type="text" class="form-control" id="dateCheckIn" placeholder="Check In" />
+                </div>
+                <div class="col-auto mx-2 form-group date">
+                    <input type="text" class="form-control" id="dateCheckOut" placeholder="Check Out" />
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden" for="selectGuestNum">Preference</label>
+                    <select class="form-select" id="selectGuestNum">
+                        <option selected>Guests...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOP OFFERS -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-house-door me-1"></i>Top Offers
+        </div>
+
+        <div class="card-body">
+            <div id="hotelCarousel" class="carousel slide carousel-dark text-center" data-mdb-ride="carousel">
+                <div class="d-flex justify-content-center mb-4">
+                    <button class="carousel-control-prev position-relative" type="button" data-mdb-target="#hotelCarousel" data-mdb-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next position-relative" type="button" data-mdb-target="#hotelCarousel" data-mdb-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <div class="carousel-inner py-2">
+
+                    <!-- SINGLE ITEM -->
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row">
+
+                                <!-- IMAGE -->
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <img src="{{ baseUrl }}/img/hotels/hotel_1.jpg" class="card-img-top" alt="..."/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- IMAGE -->
+
+                                <!-- IMAGE -->
+                                <div class="col-lg-4 d-none d-lg-block">
+                                    <div class="card">
+                                        <img src="{{ baseUrl }}/img/hotels/hotel_2.jpg" class="card-img-top" alt="..."/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- IMAGE -->
+
+                                <!-- IMAGE -->
+                                <div class="col-lg-4 d-none d-lg-block">
+                                    <div class="card">
+                                        <img src="{{ baseUrl }}/img/hotels/hotel_3.jpg" class="card-img-top" alt="..."/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- IMAGE -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SINGLE ITEM -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row">
+
+                                <!-- IMAGE -->
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <img src="{{ baseUrl }}/img/hotels/hotel_4.jpg" class="card-img-top" alt="..."/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- IMAGE -->
+
+                                <!-- IMAGE -->
+                                <div class="col-lg-4 d-none d-lg-block">
+                                    <div class="card">
+                                        <img src="{{ baseUrl }}/img/hotels/hotel_1.jpg" class="card-img-top" alt="..."/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- IMAGE -->
+
+                                <!-- IMAGE -->
+                                <div class="col-lg-4 d-none d-lg-block">
+                                    <div class="card">
+                                        <img src="{{ baseUrl }}/img/hotels/hotel_5.jpg" class="card-img-top" alt="..."/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- IMAGE -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

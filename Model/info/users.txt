@@ -1,0 +1,5 @@
+mike.smith@gmail.com    mike123     ADMIN
+sarah.jones@gmail.com   sarah123    CONTENT_MANAGER
+tom.anderson@gmail.com  tom123      CONTENT_MANAGER
+bob.sales@gmail.com     bob123      SALES_MANAGER
+john.doe@gmail.com      john123     USER

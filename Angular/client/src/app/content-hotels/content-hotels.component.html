@@ -1,0 +1,259 @@
+<div class="container-fluid mx-0 px-3">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">Hotels</a>
+    </nav>
+</div>
+
+<div class="container-fluid alert-msg pt-2 mt-5" *ngIf="!authorized">
+    <div class="alert alert-danger">{{ message }}</div>
+</div>
+
+<main class="container-fluid px-4" *ngIf="authorized">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-exclamation-lg me-1"></i>
+            View and edit all active hotels and rooms
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-table me-1"></i>
+            Hotels (showing {{ hotels.length }})
+        </div>
+
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th colspan="2">Hotel</th>
+                        <th>Rooms</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="hotels.length === 0">
+                    <tr>
+                        <td colspan="3" class="text-center">No data available</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="hotels.length > 0">
+                    <tr *ngFor="let h of hotels">
+                        <td class="align-middle">
+                            <img src="{{ baseUrl + h?.hotelImgFile }}" width="225px" alt="Hotel"><br>
+                        </td>
+                        <td class="align-middle">
+                            <div>
+                                <b>{{ h?.hotelName }}</b><br>
+                                {{ h?.hotelEmail }}<br>
+                                {{ h?.hotelPhone }}<br>
+                                {{ h?.hotelAddress }}<br>
+                            </div>
+                            <div>
+                                <a href="" (click)="onOpenEditHotelModal(h)" data-bs-toggle="modal" data-bs-target="#editHotel">Edit</a>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <table class="table table-sm table-bordered" *ngIf="h?.roomTypes.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Guests</th>
+                                        <th>Breakfast</th>
+                                        <th>Refund</th>
+                                        <th>Available</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-middle">
+                                    <tr *ngFor="let rt of h?.roomTypes">
+                                        <td class="align-middle">
+                                            <img src="{{ baseUrl }}{{ rt?.roomTypeImgFile }}" width="100px" alt="RoomType"><br>
+                                        </td>
+                                        <td>{{ rt?.roomTypeName }}</td>
+                                        <td>${{ rt?.roomTypePrice.toFixed(2) }}</td>
+                                        <td>{{ rt?.maxGuests }}</td>
+                                        <td>{{ rt?.hasBreakfast ? 'Yes' : 'No' }}</td>
+                                        <td>{{ rt?.hasRefund ? 'Yes' : 'No' }}</td>
+                                        <td>{{ rt?.rooms.length }}</td>
+                                        <td>
+                                            <a href="" (click)="onOpenEditRoomTypeModal(rt, h)" data-bs-toggle="modal" data-bs-target="#editRoomType">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>                                
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- HOTEL EDIT MODAL -->
+    <div class="modal fade" id="editHotel" tabindex="-1" aria-labelledby="editHotelModalForm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editHotelLabel">Edit hotel '{{ editHotel?.hotelName }}'</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form #editHotelForm="ngForm">
+                    <div class="modal-body">
+                        <div class="form-group mb-4">
+                            <label for="hotelName">Hotel Name</label>
+                            <input type="text" ngModel="{{ editHotel?.hotelName }}" name="hotelName" id="hotelName" class="form-control" placeholder="Hotel Name" required />
+                            <input type="hidden" ngModel="{{ editHotel?.id }}" name="id" id="id" class="form-control" />
+                            <input type="hidden" ngModel="{{ editHotel?.hotelId }}" name="hotelId" id="hotelId" class="form-control" />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="hotelEmail">Hotel Email</label>
+                            <input type="email" ngModel="{{ editHotel?.hotelEmail }}" name="hotelEmail" id="hotelEmail" class="form-control" placeholder="Hotel Email" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="hotelPhone">Hotel Phone</label>
+                            <input type="text" ngModel="{{ editHotel?.hotelPhone }}" name="hotelPhone" id="hotelPhone" class="form-control" placeholder="Hotel Phone" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="hotelAddress">Hotel Address</label>
+                            <input type="text" ngModel="{{ editHotel?.hotelAddress }}" name="hotelAddress" id="hotelAddress" class="form-control" placeholder="Hotel Address" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="hotelImgFile">Image File</label>
+                            <input type="text" ngModel="{{ editHotel?.hotelImgFile }}" name="hotelImgFile" id="hotelImgFile" class="form-control" placeholder="Image File" required />
+                        </div>
+                        <div>
+                            <a href="" (click)="onOpenAddRoomTypeModal(editHotel)" data-bs-toggle="modal" data-bs-target="#addRoomType">Add room type</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group me-auto">
+                            <input type="checkbox" class="form-check-input" id="isEnabled" name="isEnabled" [ngModel]="true" />
+                            <label class="form-check-label" for="isEnabled">Enabled</label>
+                        </div>
+                        <button (click)="onEditHotel(editHotelForm.value)" data-bs-toggle="modal" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROOM TYPE EDIT MODAL -->
+    <div class="modal fade" id="editRoomType" tabindex="-1" aria-labelledby="editRoomTypeModalForm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRoomTypeLabel">Edit room '{{ editRoomType?.roomTypeName }}' ('{{ editHotel?.hotelName }}')</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form #editRoomTypeForm="ngForm">
+                    <div class="modal-body">
+                        <div class="form-group mb-4">
+                            <label for="roomTypeName">Room Name</label>
+                            <input type="text" ngModel="{{ editRoomType?.roomTypeName }}" name="roomTypeName" id="roomTypeName" class="form-control" placeholder="Room Name" required />
+                            <input type="hidden" ngModel="{{ editHotel?.id }}" name="id" id="id" class="form-control" />
+                            <input type="hidden" ngModel="{{ editHotel?.hotelId }}" name="hotelId" id="hotelId" class="form-control" />
+                            <input type="hidden" ngModel="{{ editRoomType?.id }}" name="id" id="id" class="form-control" />
+                            <input type="hidden" ngModel="{{ editRoomType?.roomTypeId }}" name="roomTypeId" id="roomTypeId" class="form-control" />
+                            <input type="hidden" ngModel="{{ editRoomType?.hotelId }}" name="hotelId" id="hotelId" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="roomTypePrice">Room Price</label>
+                            <input type="text" ngModel="{{ editRoomType?.roomTypePrice.toFixed(2) }}" name="roomTypePrice" id="roomTypePrice" class="form-control" placeholder="Room Price" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="maxGuests">Max Guests</label>
+                            <input type="text" ngModel="{{ editRoomType?.maxGuests }}" name="maxGuests" id="maxGuests" class="form-control" placeholder="Max Guests" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="roomTypeImgFile">Image File</label>
+                            <input type="text" ngModel="{{ editRoomType?.roomTypeImgFile }}" name="roomTypeImgFile" id="roomTypeImgFile" class="form-control" placeholder="Image File" required />
+                        </div>                        
+                        <div class="form-group mb-4">
+                            <input type="checkbox" class="form-check-input" [ngModel]="editRoomType?.hasBreakfast == true ? true : false" id="hasBreakfast" name="hasBreakfast" />
+                            <label class="form-check-label" for="hasBreakfast">Breakfast</label>
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="checkbox" class="form-check-input" [ngModel]="editRoomType?.hasRefund == true ? true : false" id="hasRefund" name="hasRefund" />
+                            <label class="form-check-label" for="hasRefund">Refund</label>
+                        </div>
+
+                        <p>Active rooms</p>
+                        <div class="room-list-group">
+                            <ul class="list-group" *ngFor="let r of editRoomType?.rooms">
+                                <li class="list-group-item">
+                                    <input type="checkbox" class="form-check-input me-2" id="roomIdActive" aria-label="..." checked (change)="onDeactivateRoom(r, $event)">
+                                    <span>{{ r.roomId }}</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group me-auto">
+                            <input type="checkbox" class="form-check-input" id="isEnabled" name="isEnabled" [ngModel]="true" />
+                            <label class="form-check-label" for="isEnabled">Enabled</label>
+                        </div>
+                        <button (click)="onEditRoomType(editRoomTypeForm.value)" data-bs-toggle="modal" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROOM TYPE ADD MODAL -->
+    <div class="modal fade" id="addRoomType" tabindex="-1" aria-labelledby="addRoomTypeModalForm" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRoomTypeLabel">Add room ('{{ editHotel?.hotelName }}')</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form #addRoomTypeForm="ngForm" (ngSubmit)="onAddRoomType(addRoomTypeForm)">
+                    <div class="modal-body">
+                        <div class="form-group mb-4">
+                            <label for="roomTypeName">Room Name</label>
+                            <input type="text" ngModel name="roomTypeName" id="roomTypeName" class="form-control" placeholder="Room Name" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="roomTypeId">Room Id</label>
+                            <input type="text" ngModel name="roomTypeId" id="roomTypeId" class="form-control" placeholder="Room Id" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="roomTypePrice">Room Price</label>
+                            <input type="text" ngModel name="roomTypePrice" id="roomTypePrice" class="form-control" placeholder="Room Price" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="maxGuests">Max Guests</label>
+                            <input type="text" ngModel name="maxGuests" id="maxGuests" class="form-control" placeholder="Max Guests" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="roomTypeImgFile">Image File</label>
+                            <input type="text" ngModel name="roomTypeImgFile" id="roomTypeImgFile" class="form-control" placeholder="Image File" required />
+                        </div>                        
+                        <div class="form-group mb-4">
+                            <input type="checkbox" class="form-check-input" ngModel id="hasBreakfast" name="hasBreakfast" />
+                            <label class="form-check-label" for="hasBreakfast">Breakfast</label>
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="checkbox" class="form-check-input" ngModel id="hasRefund" name="hasRefund" />
+                            <label class="form-check-label" for="hasRefund">Refund</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button [disabled]="addRoomTypeForm.invalid" type="submit" data-bs-toggle="modal" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</main>

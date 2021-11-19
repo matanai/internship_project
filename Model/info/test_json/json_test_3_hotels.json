@@ -1,0 +1,108 @@
+[
+  {
+    "available": true,
+    "hotelId": "hotel_1",
+    "hotelName": "Zen Princess",
+    "hotelEmail": "zen_princess@company.com",
+    "hotelPhone": "+90-048-294-4522",
+    "hotelAddress": "Kemer, Turkey",
+    "hotelImgFile": "/img/hotels/hotel_1.jpg",
+    "roomTypeList":
+    [
+      {
+        "available": true,
+        "roomTypeId": "room_type_1_1",
+        "roomTypeName": "Single Standard",
+        "roomTypePrice": 85.00,
+        "maxGuests": 1,
+        "hasBreakfast": false,
+        "hasRefund": false,
+        "roomTypeImgFile": "/img/rooms/room_type_1_1.jpg",
+        "roomIdList": [
+          "room_1_1_1",
+          "room_1_1_2",
+          "room_1_1_3",
+          "room_1_1_4",
+          "room_1_1_5",
+          "room_1_1_6"
+        ]
+      }
+    ]
+  },
+  {
+    "available": true,
+    "hotelId": "hotel_2",
+    "hotelName": "Ocean Blue",
+    "hotelEmail": "ocean_blue@company.com",
+    "hotelPhone": "+90-048-240-2939",
+    "hotelAddress": "Antalya, Turkey",
+    "hotelImgFile": "/img/hotels/hotel_2.jpg",
+    "roomTypeList":
+    [
+      {
+        "available": true,
+        "roomTypeId": "room_type_2_1",
+        "roomTypeName": "Single Standard",
+        "roomTypePrice": 95.00,
+        "maxGuests": 1,
+        "hasBreakfast": false,
+        "hasRefund": false,
+        "roomTypeImgFile": "/img/rooms/room_type_2_1.jpg",
+        "roomIdList": [
+          "room_2_1_1",
+          "room_2_1_2",
+          "room_2_1_3",
+          "room_2_1_4",
+          "room_2_1_5",
+          "room_2_1_6"
+        ]
+      }
+    ]
+  },
+  {
+    "available": true,
+    "hotelId": "hotel_3",
+    "hotelName": "Sultan Caves",
+    "hotelEmail": "sultan_caves@company.com",
+    "hotelPhone": "+90-048-210-1948",
+    "hotelAddress": "Ankara, Turkey",
+    "hotelImgFile": "/img/hotels/hotel_3.jpg",
+    "roomTypeList":
+    [
+      {
+        "available": true,
+        "roomTypeId": "room_type_3_1",
+        "roomTypeName": "Single Standard",
+        "roomTypePrice": 78.00,
+        "maxGuests": 1,
+        "hasBreakfast": true,
+        "hasRefund": false,
+        "roomTypeImgFile": "/img/rooms/room_type_3_1.jpg",
+        "roomIdList": [
+          "room_3_1_1",
+          "room_3_1_2",
+          "room_3_1_3",
+          "room_3_1_4",
+          "room_3_1_5",
+          "room_3_1_6"
+        ]
+      },
+      {
+        "available": true,
+        "roomTypeId": "room_type_3_2",
+        "roomTypeName": "Triple Standard",
+        "roomTypePrice": 150.00,
+        "maxGuests": 3,
+        "hasBreakfast": true,
+        "hasRefund": true,
+        "roomTypeImgFile": "/img/rooms/room_type_3_2.jpg",
+        "roomIdList": [
+          "room_3_2_1",
+          "room_3_2_2",
+          "room_3_2_3",
+          "room_3_2_4"
+        ]
+      }
+    ]
+  }
+]

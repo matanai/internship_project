@@ -1,0 +1,91 @@
+[
+  {
+    "available": true,
+    "hotelId": "hotel_1",
+    "hotelName": "Zen Princess",
+    "hotelEmail": "zen_princess@company.com",
+    "hotelPhone": "+90-048-294-4522",
+    "hotelAddress": "Kemer, Turkey",
+    "hotelImgFile": "/img/hotels/hotel_1.jpg",
+    "roomTypeList":
+    [
+      {
+        "available": true,
+        "roomTypeId": "room_type_1_1",
+        "roomTypeName": "Single Standard",
+        "roomTypePrice": 85.00,
+        "maxGuests": 1,
+        "hasBreakfast": false,
+        "hasRefund": false,
+        "roomTypeImgFile": "/img/rooms/room_type_1_1.jpg",
+        "roomIdList": [
+          "room_1_1_1",
+          "room_1_1_2",
+          "room_1_1_3",
+          "room_1_1_4",
+          "room_1_1_5",
+          "room_1_1_6"
+        ]
+      },
+      {
+        "available": true,
+        "roomTypeId": "room_type_1_2",
+        "roomTypeName": "Double Standard",
+        "roomTypePrice": 110.00,
+        "maxGuests": 2,
+        "hasBreakfast": true,
+        "hasRefund": false,
+        "roomTypeImgFile": "/img/rooms/room_type_1_2.jpg",
+        "roomIdList": [
+          "room_1_2_1",
+          "room_1_2_2",
+          "room_1_2_3",
+          "room_1_2_4"
+        ]
+      },
+      {
+        "available": true,
+        "roomTypeId": "room_type_1_3",
+        "roomTypeName": "Studio Standard",
+        "roomTypePrice": 145.00,
+        "maxGuests": 2,
+        "hasBreakfast": true,
+        "hasRefund": true,
+        "roomTypeImgFile": "/img/rooms/room_type_1_3.jpg",
+        "roomIdList": [
+          "room_1_3_1",
+          "room_1_3_2",
+          "room_1_3_3",
+          "room_1_3_4"
+        ]
+      },
+      {
+        "available": true,
+        "roomTypeId": "room_type_1_4",
+        "roomTypeName": "Studio Comfort",
+        "roomTypePrice": 160.00,
+        "maxGuests": 3,
+        "hasBreakfast": true,
+        "hasRefund": true,
+        "roomTypeImgFile": "/img/rooms/room_type_1_4.jpg",
+        "roomIdList": [
+          "room_1_4_1",
+          "room_1_4_2",
+          "room_1_4_3",
+          "room_1_4_4"
+        ]
+      }
+    ]
+  },
+  {
+    "available": true,
+    "hotelId": "hotel_2",
+    "hotelName": "Ocean Blue",
+    "hotelEmail": "ocean_blue@company.com",
+    "hotelPhone": "+90-048-240-2939",
+    "hotelAddress": "Antalya, Turkey",
+    "hotelImgFile": "/img/hotels/hotel_2.jpg",
+    "roomTypeList":
+    []
+  }
+]

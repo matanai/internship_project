@@ -1,0 +1,74 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand mt-2 mt-lg-0" href="#" routerLink="/home">Booking</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" routerLink="/home">Home</a>
+                    </li>
+                    
+                    <li class="nav-item" *ngIf="showAdminUsers">
+                        <a href="/admin/users" class="nav-link" routerLink="/admin/users">Users</a>
+                    </li>
+                    <li class="nav-item" *ngIf="showAdminExport">
+                        <a href="{{ exportPage }}" class="nav-link">Export</a>
+                    </li>
+                    <li class="nav-item" *ngIf="showContentUpload">
+                        <a href="/content/upload" class="nav-link" routerLink="/content/upload">Upload</a>
+                    </li>
+                    <li class="nav-item" *ngIf="showContentReport">
+                        <a href="/content/report" class="nav-link" routerLink="/content/report">Report</a>
+                    </li>
+                    <li class="nav-item" *ngIf="showContentHotels">
+                        <a href="/content/hotels" class="nav-link" routerLink="/content/hotels">Hotels</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="d-flex align-items-center me-2">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <span class="nav-link">{{ username }}</span>
+                    </li>
+                </ul>
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill navbar-icon"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end" *ngIf="!isLoggedIn">
+                    <li><a class="dropdown-item" href="login" routerLink="/login">Log In</a></li>
+                    <li><a class="dropdown-item" href="register" routerLink="/register">Register</a></li>
+                </ul>
+
+                <ul class="dropdown-menu dropdown-menu-end" *ngIf="isLoggedIn">
+                    <li>
+                        <span class="dropdown-item">
+                            <div *ngFor="let r of roles">
+                                {{ getRoleNamePretty(r) }}
+                            </div>
+                        </span>
+                    </li>
+                    <hr class="dropdown-divider" />
+                    <li><a class="dropdown-item" href (click)="logout()">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>    
+</header>
+
+<router-outlet></router-outlet>
+
+<footer>
+    <div class="footer text-muted">
+        <p>&copy; 2021 Booking &middot;
+            <a href="#">Privacy</a> &middot;
+            <a href="#">Terms</a>
+        </p>
+    </div>
+</footer>
+

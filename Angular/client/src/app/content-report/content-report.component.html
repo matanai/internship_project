@@ -1,0 +1,86 @@
+<div class="container-fluid mx-0 px-3">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand">Tracking Report</a>
+    </nav>
+</div>
+
+<div class="container-fluid alert-msg pt-2 mt-5" *ngIf="!authorized">
+    <div class="alert alert-danger">{{ message }}</div>
+</div>
+
+<main class="container-fluid px-4 main-container" *ngIf="authorized">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-exclamation-lg me-1"></i>
+            Show list of all submitted messages with corresponding data and links to details of each message
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-table me-1"></i>
+            <span>Tracking Reports (showing {{ trackingReportPage?.limit }} of {{ trackingReportPage?.totalRows }})</span>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tracking Id</th>
+                        <th scope="col">Date time</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Successful</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="trackingReportPage?.trackingRecordList.length === 0">
+                    <tr>
+                        <td colspan="6" class="text-center">No data available</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="trackingReportPage?.trackingRecordList.length > 0">
+                    <tr *ngFor="let r of trackingReportPage?.trackingRecordList; let i = index">
+                        <td>{{ trackingReportPage?.limit * (trackingReportPage?.page - 1) + (i + 1) }}</td>
+                        <td>{{ r?.trackingId }}</td>
+                        <td>{{ getDateTimeFormat(r?.dateTime) }}</td>
+                        <td>{{ r?.userNameAndRole }}</td>
+                        <td [ngClass]="getSuccessRateColor(r?.successRate)">{{ r?.numMessages }} ({{ r?.successRate }}%)</td>
+                        <td><a href="content/message/{{ r?.trackingId }}/{{ r?.userNameAndRole }}">See details</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-grid gap-2 d-md-flex justify-content-between">
+                <nav aria-label="Table pagination">
+                    <ul class="pagination">
+                        <li *ngIf="trackingReportPage?.limit < trackingReportPage?.totalRows" [ngClass]="showPrev(trackingReportPage?.page)">
+                            <a class="page-link" role="button" (click)="getReport(trackingReportPage?.page - 1, trackingReportPage?.limit)">Prev</a>
+                        </li>
+
+                        <div *ngFor="let i of getPageCounter(trackingReportPage?.numOfPages)">
+                            <li class="page-item active" *ngIf="trackingReportPage?.page === i">
+                                <a class="page-link">{{ i }}</a>
+                            </li>
+                            <li class="page-item" *ngIf="i !== 0 && trackingReportPage?.page !== i">
+                                <a class="page-link" role="button" (click)="getReport(i, trackingReportPage?.limit)">{{ i }}</a>
+                            </li>
+                        </div>
+
+                        <li *ngIf="trackingReportPage?.limit < trackingReportPage?.totalRows" [ngClass]="showNext(trackingReportPage?.page, trackingReportPage?.numOfPages)">
+                            <a class="page-link" role="button" (click)="getReport(trackingReportPage?.page + 1, trackingReportPage?.limit)">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="dropdown dropdown-menu-end">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropDownLimit" data-bs-toggle="dropdown" aria-expanded="false">
+                        Show
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropDownLimit">
+                        <li><a class="dropdown-item" role="button" (click)="getReport(0, 5)">5</a></li>
+                        <li><a class="dropdown-item" role="button" (click)="getReport(0, 10)">10</a></li>
+                        <li><a class="dropdown-item" role="button" (click)="getReport(0, 20)">20</a></li>
+                        <li><a class="dropdown-item" role="button" (click)="getReport(0, 30)">30</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

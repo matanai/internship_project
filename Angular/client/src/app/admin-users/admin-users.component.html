@@ -1,0 +1,107 @@
+<div class="container-fluid mx-0 px-3">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand">Users</a>
+  </nav>
+</div>
+
+<div class="container-fluid alert-msg pt-2 mt-5" *ngIf="!authorized">
+  <div class="alert alert-danger">{{ message }}</div>
+</div>
+
+<main class="container-fluid px-4" *ngIf="authorized">
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="bi bi-exclamation-lg me-1"></i>
+      View and edit all active users
+    </div>
+  </div>
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="bi bi-table me-1"></i>
+      <span>Users (showing {{ users?.length }})</span>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Enabled</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="align-middle" *ngFor="let u of users; let i = index">
+          <tr [ngClass]="getStylesIfCurrentUser(u)">
+            <td>{{ i + 1 }}</td>
+            <td>{{ u?.firstName }}</td>
+            <td>{{ u?.lastName }}</td>
+            <td>{{ u?.username }}</td>
+            <td>
+              <div *ngFor="let r of u?.roles">
+                {{ getRoleNamePretty(r) }}
+              </div>
+            </td>
+            <td>{{ u?. enabled ? "Yes" : "No" }}</td>
+            <td *ngIf="u?.username != currentUser?.username">
+              <a href (click)="onOpenEditUserModal(u)" data-bs-toggle="modal" data-bs-target="#editUser">Edit</a>
+            </td>
+            <td *ngIf="u?.username == currentUser?.username">
+              <span>N/A</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- USER EDIT MODAL -->
+<div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserModalForm" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+        <h5 class="modal-title" id="editUserLabel">Edit user '{{ editUser?.username }}'</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form #editUserForm="ngForm">
+        <div class="modal-body">
+          <input type="hidden" ngModel="{{ editUser?.id }}" name="id" id="id" class="form-control" />
+          <div class="form-group mb-4">
+            <label for="firstName">First Name</label>
+            <input type="text" ngModel="{{ editUser?.firstName }}" name="firstName" id="firstName" class="form-control" placeholder="First Name" required />
+          </div>
+          <div class="form-group mb-4">
+            <label for="lastName">Last Name</label>
+            <input type="text" ngModel="{{ editUser?.lastName }}" name="lastName" id="lastName" class="form-control" placeholder="Last Name" required />
+          </div>
+          Edit roles:<br> 
+          <div class="form-group mb-4">
+            <input type="checkbox" class="form-check-input" id="roleUser" name="roleUser" [ngModel]="hasRole(editUser?.roles, 'ROLE_USER')" />
+            <label class="form-check-label" for="roleUser">USER</label><br>
+
+            <input type="checkbox" class="form-check-input" id="roleAdmin" name="roleAdmin" [ngModel]="hasRole(editUser?.roles, 'ROLE_ADMIN')" />
+            <label class="form-check-label" for="roleAdmin">ADMIN</label><br>
+            
+            <input type="checkbox" class="form-check-input" id="roleContentManager" name="roleContentManager" [ngModel]="hasRole(editUser?.roles, 'ROLE_CONTENT_MANAGER')" />
+            <label class="form-check-label" for="roleContentManager">CONTENT_MANAGER</label><br>
+            
+            <input type="checkbox" class="form-check-input" id="roleSalesManager" name="roleSalesManager" [ngModel]="hasRole(editUser?.roles, 'ROLE_SALES_MANAGER')" />
+            <label class="form-check-label" for="roleSalesManager">SALES_MANAGER</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group me-auto">
+            <input type="checkbox" class="form-check-input" [ngModel]="editUser?.enabled == true ? true : false" id="enabled" name="enabled" />
+            <label class="form-check-label" for="enabled">Enabled</label>
+          </div>
+          <button (click)="onEditUser(editUserForm.value)" data-bs-toggle="modal" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container-fluid mx-0 px-3">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">Upload</a>
+    </nav>
+</div>
+
+<div class="container-fluid alert-msg pt-2 mt-5" *ngIf="!authorized">
+    <div class="alert alert-danger">{{ message }}</div>
+</div>
+
+<main class="container-fluid px-4" *ngIf="authorized">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-exclamation-lg me-1"></i>
+            Upload file with hotels and rooms data in .json format
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-cloud-arrow-up me-1"></i>
+            Upload
+        </div>
+
+        <div class="card-body text-center">
+            <input type="file" name="files" (change)="onUploadFile($event)"/>
+        </div>
+
+    </div>
+</main>

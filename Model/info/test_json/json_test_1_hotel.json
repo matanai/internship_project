@@ -1,0 +1,32 @@
+[
+  {
+    "available": true,
+    "hotelId": "hotel_1",
+    "hotelName": "Zen Princess",
+    "hotelEmail": "zen_princess@company.com",
+    "hotelPhone": "+90-048-294-4522",
+    "hotelAddress": "Kemer, Turkey",
+    "hotelImgFile": "/img/hotels/hotel_1.jpg",
+    "roomTypeList":
+    [
+      {
+        "available": true,
+        "roomTypeId": "room_type_1_1",
+        "roomTypeName": "Single Standard",
+        "roomTypePrice": 85.00,
+        "maxGuests": 1,
+        "hasBreakfast": false,
+        "hasRefund": false,
+        "roomTypeImgFile": "/img/rooms/room_type_1_1.jpg",
+        "roomIdList": [
+          "room_1_1_1",
+          "room_1_1_2",
+          "room_1_1_3",
+          "room_1_1_4",
+          "room_1_1_5",
+          "room_1_1_6"
+        ]
+      }
+    ]
+  }
+]
